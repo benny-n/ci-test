@@ -65,10 +65,22 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: fmt
-          args: --manifest-path pacakges/server/Cargo.toml --all -- --fix
+          args: --manifest-path pacakges/server/Cargo.toml --all 
+
+      - name: Check cargo fmt
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: --manifest-path pacakges/server/Cargo.toml --all -- --check
 
       - name: Run cargo clippy
         uses: actions-rs/cargo@v1
         with:
           command: clippy
           args: --manifest-path pacakges/server/Cargo.toml -- -D warnings --fix
+
+      - name: Check cargo clippy
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: --manifest-path pacakges/server/Cargo.toml -- -D warnings
