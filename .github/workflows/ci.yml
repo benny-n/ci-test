@@ -2,6 +2,9 @@ on: [push, pull_request]
 
 name: Quickstart
 
+env:
+  CARGO_TERM_COLOR: always
+
 jobs:
   check:
     name: Check
@@ -22,6 +25,7 @@ jobs:
         continue-on-error: true  # WARNING: only for this example, remove it!
         with:
           command: check
+          args: --manifest-path pacakges/server/Cargo.toml
 
   test:
     name: Test Suite
@@ -42,6 +46,7 @@ jobs:
         continue-on-error: true  # WARNING: only for this example, remove it!
         with:
           command: test
+          args: --manifest-path pacakges/server/Cargo.toml
 
   lints:
     name: Lints
@@ -63,11 +68,11 @@ jobs:
         continue-on-error: true  # WARNING: only for this example, remove it!
         with:
           command: fmt
-          args: --all -- --check
+          args: --manifest-path pacakges/server/Cargo.toml --all -- --check
 
       - name: Run cargo clippy
         uses: actions-rs/cargo@v1
         continue-on-error: true  # WARNING: only for this example, remove it!
         with:
           command: clippy
-          args: -- -D warnings
+          args: --manifest-path pacakges/server/Cargo.toml -- -D warnings
