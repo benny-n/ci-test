@@ -1,13 +1,13 @@
 on: [push, pull_request]
 
-name: Quickstart
+name: Sogrim-CI
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  check:
-    name: Check
+  compile:
+    name: Compile
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
@@ -27,7 +27,8 @@ jobs:
           args: --manifest-path pacakges/server/Cargo.toml
 
   test:
-    name: Test Suite
+    name: Run Tests
+    needs: compile
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
@@ -47,7 +48,7 @@ jobs:
           args: --manifest-path pacakges/server/Cargo.toml
 
   lints:
-    name: Lints
+    name: Format + Clippy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
@@ -73,9 +74,10 @@ jobs:
           command: clippy
           args: --manifest-path pacakges/server/Cargo.toml -- -D warnings
 
-  build:
+  deploy:
+    name: Deploy to Heroku
     runs-on: ubuntu-latest
-    needs: [check, test, lints]
+    needs: [compile, test, lints]
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
