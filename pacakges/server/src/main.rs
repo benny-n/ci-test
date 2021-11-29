@@ -2,6 +2,10 @@ fn main() {
     println!("Hello, world!");
 }
 
+async fn what(){
+    todo!();
+}
+
 #[cfg(test)]
 mod tests {
 
