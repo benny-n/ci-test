@@ -4,6 +4,7 @@ name: Sogrim-CI
 
 env:
   CARGO_TERM_COLOR: always
+  HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
 
 jobs:
   compile:
