@@ -1,16 +1,13 @@
-
-
 #[cfg(test)]
 mod tests {
 
     #[test]
     fn env_test() {
-        println!("{:#?}", std::env::var("HEROKU_API_KEY"));
+        std::env::var("HEROKU_API_KEY").unwrap();
+        assert_eq!(std::env::var("CARGO_TERM_COLOR").unwrap(), "always");
     }
 }
-
 
 fn main() {
     println!("Hello, world!");
 }
-
