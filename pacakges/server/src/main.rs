@@ -10,5 +10,6 @@ mod tests {
 }
 
 fn main() {
+    asd
     println!("Hello, world!");
 }

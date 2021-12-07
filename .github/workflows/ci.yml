@@ -8,26 +8,6 @@ env:
   SOMEVAR: ${{secrets.SOME_VAR}}
 
 jobs:
-  compile:
-    name: Compile
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout sources
-        uses: actions/checkout@v2
-
-      - name: Install stable toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
-
-      - name: Run cargo check
-        uses: actions-rs/cargo@v1
-        with:
-          command: check
-          args: --manifest-path pacakges/server/Cargo.toml
-
   test:
     name: Run Tests
     needs: compile
@@ -102,3 +82,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "sh-ops-server" #Must be unique in Heroku
           heroku_email: "benick12@gmail.com"
+          procfile: "web: PORT=$PORT PROFILE=staging ./pacakges/server/target/release/server"
