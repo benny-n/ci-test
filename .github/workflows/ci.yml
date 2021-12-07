@@ -1,5 +1,7 @@
 on: 
-  pull_request: main
+  pull_request:
+    branches: 
+    - master
 
 name: Sogrim-CI
 
