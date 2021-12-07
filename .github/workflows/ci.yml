@@ -6,7 +6,6 @@ env:
   CARGO_TERM_COLOR: always
   HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
   SOMEVAR: ${{secrets.SOME_VAR}}
-  BUILD_PATH: pacakges/server
 
 jobs:
 
