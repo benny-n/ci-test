@@ -6,6 +6,7 @@ env:
   CARGO_TERM_COLOR: always
   HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
   SOMEVAR: ${{secrets.SOME_VAR}}
+  BUILD_PATH: pacakges/server
 
 jobs:
 
@@ -19,5 +20,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "sh-ops-server" #Must be unique in Heroku
           heroku_email: "benick12@gmail.com"
-          buildpack: "https://github.com/emk/heroku-buildpack-rust.git"
           procfile: "web: PORT=$PORT PROFILE=staging ./pacakges/server/target/release/server" 
