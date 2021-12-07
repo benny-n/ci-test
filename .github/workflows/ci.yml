@@ -1,4 +1,4 @@
-on: [push, pull_request]
+on: [push]
 
 name: Sogrim-CI
 
@@ -19,5 +19,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "sh-ops-server" #Must be unique in Heroku
           heroku_email: "benick12@gmail.com"
-          procfile: "web: PORT=$PORT PROFILE=staging ./pacakges/server/target/release/server"
-          dontuseforce: true 
+          procfile: "web: PORT=$PORT PROFILE=staging ./pacakges/server/target/release/server" 
