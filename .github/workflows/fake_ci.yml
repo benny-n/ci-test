@@ -2,8 +2,8 @@ on:
   pull_request:
     branches:
       - master
-    paths:
-      - "packages/server"
+    paths: -"**"
+      - "!packages/server/**"
 
 name: Real-CI
 
@@ -12,4 +12,4 @@ jobs:
     name: Echo
     runs-on: ubuntu-latest
     steps:
-      - run: echo REAL
+      - run: echo FAKE
