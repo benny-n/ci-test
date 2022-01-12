@@ -12,7 +12,7 @@ mod tests {
         panic!();
     }
 }
-// should triggerqwdqwdqwdqwdqwdasdasdsadsqdqdqASDASDASDASDASDASD
+// should triggerqwdqwdqwdqwdqwdasdasdsadsqdqdqASDASDASDASDASDASDqwdqwdqwd
 fn main() {
     println!("Hello, world!");
 }
