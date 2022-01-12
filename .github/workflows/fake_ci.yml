@@ -5,6 +5,7 @@ on:
     paths:
       - "**"
       - "!/packages/server/**"
+      - "!/packages/server/*/**"
 
 name: Fake-CI
 
