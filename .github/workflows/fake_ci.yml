@@ -3,15 +3,14 @@ on:
     branches:
       - master
     paths:
-      - "packages/docs"
-      - "packages/sogrim-app"
-      - "packages/sogrim-bo-app"
+      - "**"
+      - "!/packages/server/**"
 
-name: Client-CI
+name: Fake-CI
 
 jobs:
   test:
     name: Echo
     runs-on: ubuntu-latest
     steps:
-      - run: echo CLIENT
+      - run: echo FAKE
