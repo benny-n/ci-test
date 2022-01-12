@@ -4,9 +4,9 @@ on:
       - master
     paths:
       - "**"
-      - "!packages/server"
+      - "!packages/server/**"
 
-name: Real-CI
+name: Fake-CI
 
 jobs:
   test:
