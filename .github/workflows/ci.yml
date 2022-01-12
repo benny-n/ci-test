@@ -3,7 +3,7 @@ on:
     branches:
       - master
     paths:
-      - "packages/server"
+      - "packages/server/**"
 
 name: Real-CI
 
