@@ -3,7 +3,7 @@ on:
     branches:
       - master
     paths:
-      - "/**"
+      - "**"
       - "!/packages/server/**"
 
 name: Fake-CI
