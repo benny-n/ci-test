@@ -6,7 +6,7 @@ on:
       - "**"
       - "!pacakges/server/**"
 
-name: Fake-CI
+name: Fake-CI # BOTH
 
 jobs:
   test:
