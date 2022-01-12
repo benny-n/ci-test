@@ -2,6 +2,8 @@ on:
   pull_request:
     branches: 
     - master
+    paths:
+    "packages/server"
 
 name: Sogrim-CI
 
