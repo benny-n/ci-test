@@ -7,6 +7,10 @@ mod tests {
         assert_eq!(std::env::var("CARGO_TERM_COLOR").unwrap(), "always");
         assert_eq!(std::env::var("SOMEVAR").unwrap(), "this_works");
     }
+    #[test]
+    fn fail_test() {
+        panic!();
+    }
 }
 
 fn main() {
