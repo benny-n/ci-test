@@ -1,9 +1,9 @@
-on: 
+on:
   pull_request:
-    branches: 
-    - master
+    branches:
+      - master
     paths:
-    "packages/server"
+      - "packages/server"
 
 name: Sogrim-CI
 
@@ -13,7 +13,6 @@ env:
   SOMEVAR: ${{secrets.SOME_VAR}}
 
 jobs:
-
   test:
     name: Run Tests
     runs-on: ubuntu-latest
@@ -44,4 +43,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "sh-ops-server" #Must be unique in Heroku
           heroku_email: "benick12@gmail.com"
-          procfile: "web: PORT=$PORT PROFILE=staging ./pacakges/server/target/release/server" 
+          procfile: "web: PORT=$PORT PROFILE=staging ./pacakges/server/target/release/server"
