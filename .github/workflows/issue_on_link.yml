@@ -1,6 +1,6 @@
 on:
   issues:
-    types: [connected]
+    types: [assigned]
 
 jobs:
   apply-label:
@@ -9,9 +9,15 @@ jobs:
       - uses: actions/github-script@v5
         with:
           script: |
+            github.rest.issues.removeLabel({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: ':traffic_light: S-Backlog'
+            })
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: ['in-progress']
+              labels: [':traffic_light: S-In-Progress']
             })
