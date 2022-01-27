@@ -1,6 +1,6 @@
 on:
   issues:
-    types: [connected]
+    types: [closed]
 
 jobs:
   apply-label:
@@ -9,6 +9,12 @@ jobs:
       - uses: actions/github-script@v5
         with:
           script: |
+            github.rest.issues.removeLabel({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.owner,
+              labels: ['in-progress']
+            })
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
               owner: context.repo.owner,
