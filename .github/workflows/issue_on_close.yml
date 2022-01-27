@@ -1,6 +1,6 @@
 on:
   issues:
-    types: [opened]
+    types: [connected]
 
 jobs:
   apply-label:
@@ -13,5 +13,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: ['good first issue']
+              labels: ['done']
             })
