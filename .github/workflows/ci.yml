@@ -12,3 +12,8 @@ jobs:
       - uses: rymndhng/release-on-push-action@master
         with:
           bump_version_scheme: norelease # Never generate a release unless explicitly specified with PR labels.
+
+      - name: Check Output Parameters
+        run: |
+          echo "Got tag name ${{ steps.release.outputs.tag_name }}"
+          echo "Got release version ${{ steps.release.outputs.version }}"
