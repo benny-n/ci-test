@@ -2,23 +2,13 @@ on:
   push:
     branches:
       - master
+
 jobs:
-  test:
-    name: coverage
+  release-on-push:
     runs-on: ubuntu-latest
-    container:
-      image: xd009642/tarpaulin:develop-nightly
-      options: --security-opt seccomp=unconfined
+    env:
+      GITHUB_TOKEN: ${{ secrets._GITHUB_API_TOKEN }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Generate code coverage
-        run: |
-          cargo +nightly tarpaulin --manifest-path pacakges/server/Cargo.toml --verbose --all-features --workspace --timeout 120 --out Xml
-
-      - name: Upload to codecov.io
-        uses: codecov/codecov-action@v2
+      - uses: rymndhng/release-on-push-action@master
         with:
-          # token:                ${{secrets.CODECOV_TOKEN}} # not required for public repos
-          fail_ci_if_error: true
+          bump_version_scheme: minor
