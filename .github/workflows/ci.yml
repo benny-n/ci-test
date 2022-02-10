@@ -10,3 +10,5 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: rymndhng/release-on-push-action@master
+        with:
+          bump_version_scheme: norelease # Never generate a release unless explicitly specified with PR labels.
