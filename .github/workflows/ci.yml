@@ -1,15 +1,12 @@
-on: [push]
-
-name: Sogrim-CI
-
-env:
-  CARGO_TERM_COLOR: always
-  HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
-  SOMEVAR: ${{secrets.SOME_VAR}}
+on:
+  push:
+    branches:
+      - master
 
 jobs:
-  deploy:
-    name: Deploy to Heroku
+  release-on-push:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: rymndhng/release-on-push-action@master
