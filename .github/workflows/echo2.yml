@@ -1,0 +1,14 @@
+on:
+  push:
+    branches:
+      - master # TODO someday will probably need to be renamed into 'main'
+
+name: Echo 2
+
+jobs:
+  echo-one:
+    needs: Echo 1
+    runs-on: ubuntu-latest
+    run:
+      - |
+        echo "Echo 2"
