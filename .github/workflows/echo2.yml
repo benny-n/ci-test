@@ -6,9 +6,10 @@ on:
 name: Echo 2
 
 jobs:
-  echo-one:
+  echo-two:
+    name: Echo 2
     needs: Echo 1
     runs-on: ubuntu-latest
-    run:
-      - |
-        echo "Echo 2"
+    steps:
+      - run: |
+          echo "Echo 2"

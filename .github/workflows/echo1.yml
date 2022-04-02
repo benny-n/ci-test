@@ -7,7 +7,8 @@ name: Echo 1
 
 jobs:
   echo-one:
+    name: Echo 1
     runs-on: ubuntu-latest
-    run:
-      - |
-        echo "Echo 1"
+    steps:
+      - run: |
+          echo "Echo 1"
