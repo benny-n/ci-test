@@ -20,7 +20,7 @@ jobs:
               console.log('No release version found in PR title')
               return
             }
-            const newRelease = match[0]
+            const newRelease = match[1]
             // Get the latest release version from the repo
             const releases = await github.rest.repos.listReleases({
               owner: context.repo.owner,
@@ -31,7 +31,9 @@ jobs:
             // If they differ by the major number, add the label release:major
             // If they differ by the minor number, add the label release:minor
             // If they differ by the patch number, add the label release:patch
-            const newReleaseVersion = newRelease[1].split('.')
+            console.log(`Latest release: ${latestRelease}`)
+            console.log(`New release: ${newRelease}`)
+            const newReleaseVersion = newRelease.split('.')
             const latestReleaseVersion = latestRelease.split('.')
             let label = 'release:'
             if (newReleaseVersion[0] > latestReleaseVersion[0]) {
@@ -41,6 +43,7 @@ jobs:
             } else if (newReleaseVersion[2] > latestReleaseVersion[2]) {
               label += 'patch'
             }
+            console.log(`Applying label: ${label}`)
             // Add the label to the PR
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
