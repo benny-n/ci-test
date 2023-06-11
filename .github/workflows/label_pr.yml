@@ -3,6 +3,8 @@ on:
     branches:
       - master # TODO someday will probably need to be renamed into 'main'
 
+name: PR auto-label
+
 jobs:
   apply-label:
     runs-on: ubuntu-latest
@@ -10,9 +12,39 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
+            // Get release version from PR title
+            const title = context.payload.pull_request.title
+            const regex = /Release v(\d+\.\d+\.\d+)/
+            const match = title.match(regex)
+            if (!match) {
+              console.log('No release version found in PR title')
+              return
+            }
+            const newRelease = match[0]
+            // Get the latest release version from the repo
+            const releases = await github.rest.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            })
+            const latestRelease = releases.data[0].tag_name.replace('v', '')
+            // Compare the two versions. 
+            // If they differ by the major number, add the label release:major
+            // If they differ by the minor number, add the label release:minor
+            // If they differ by the patch number, add the label release:patch
+            const newReleaseVersion = newRelease[1].split('.')
+            const latestReleaseVersion = latestRelease.split('.')
+            let label = 'release:'
+            if (newReleaseVersion[0] > latestReleaseVersion[0]) {
+              label += 'major'
+            } else if (newReleaseVersion[1] > latestReleaseVersion[1]) {
+              label += 'minor'
+            } else if (newReleaseVersion[2] > latestReleaseVersion[2]) {
+              label += 'patch'
+            }
+            // Add the label to the PR
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: ['release:patch']
+              labels: [label]
             })
