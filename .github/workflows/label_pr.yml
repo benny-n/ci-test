@@ -12,6 +12,26 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
+            // First, remove the current release label
+            const labels = await github.rest.issues.listLabelsOnIssue({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            })
+            const releaseLabels = labels.data.filter(label => label.name.startsWith('release:'))
+            if (releaseLabels.length > 1) {
+              core.setFailed('More than one release label found')
+              return
+            }
+            if (releaseLabels.length === 1) {
+              console.log(`Removing label: ${releaseLabels[0].name}`)
+              await github.rest.issues.removeLabel({
+                issue_number: context.issue.number,
+                name: releaseLabels[0].name,
+                owner: context.repo.owner,
+                repo: context.repo.repo
+              })
+            }
             // Get release version from PR title
             const title = context.payload.pull_request.title
             const regex = /Release v(\d+\.\d+\.\d+)/
@@ -64,6 +84,10 @@ jobs:
               }
             } else {
               core.setFailed('v${newRelease} is already the latest release')
+              return
+            }
+            // if core was set to fail, we don't want to apply the label
+            if (core.failed) {
               return
             }
             console.log(`Applying label: ${label}`)
