@@ -7,20 +7,17 @@ name: Echo 1
 
 jobs:
   echo-one:
-    name: Echo 1
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: |
-          {
-            echo 'RUST_TOOLCHAIN<<EOF'
-            cat rust-toolchain
-            echo EOF
-          } >> "$GITHUB_ENV"
+    
+    - uses: actions/checkout@v4
+    
+    - name: Echo 1
+      id: multiline
+      run: |
+        rust_toolchain="$(cat rust-toolchain)"
+        echo "RUST_TOOLCHAIN<<EOF"$'\n'"$rust_toolchain"$'\n'EOF >> "$RUST_TOOLCHAIN"
 
-  echo-env:
-    name: Echo the environment
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo "${{ env.RUST_TOOLCHAIN }}"
+    - name: Echo the environment
+      run: |
+        echo ${{ steps.multiline.outputs.RUST_TOOLCHAIN) }}
