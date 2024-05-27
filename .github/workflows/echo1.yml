@@ -23,5 +23,5 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         build-args: |
-            'RUST_TOOLCHAIN=${{ steps.toolchain.outputs.RUST_TOOLCHAIN }}'
+            "RUST_TOOLCHAIN=${{ steps.toolchain.outputs.RUST_TOOLCHAIN }}"
 
