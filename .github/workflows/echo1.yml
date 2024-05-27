@@ -11,4 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "Echo 1"
+          RUST_TOOLCHAIN="$(cat rust-toolchain)" && echo "RUST_TOOLCHAIN=$RUST_TOOLCHAIN" >> $GITHUB_ENV
+
+  echo-env:
+    name: Echo the environment
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo {{ env.RUST_TOOLCHAIN }}
