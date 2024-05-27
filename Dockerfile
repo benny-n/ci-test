@@ -1,4 +1,4 @@
-FROM scratch
+FROM rust:slim-bookworm
 
 ARG RUST_TOOLCHAIN
 RUN echo "$RUST_TOOLCHAIN"
