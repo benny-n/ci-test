@@ -20,4 +20,4 @@ jobs:
 
     - name: Echo the environment
       run: |
-        echo ${{ steps.multiline.outputs.RUST_TOOLCHAIN }}
+        echo "${{ steps.multiline.outputs.RUST_TOOLCHAIN }}"
