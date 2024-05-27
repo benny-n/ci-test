@@ -10,6 +10,7 @@ jobs:
     name: Echo 1
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: |
           RUST_TOOLCHAIN="$(cat rust-toolchain)" && echo "RUST_TOOLCHAIN=$RUST_TOOLCHAIN" >> $GITHUB_ENV
 
@@ -18,4 +19,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo {{ env.RUST_TOOLCHAIN }}
+          echo "${{ env.RUST_TOOLCHAIN }}"
