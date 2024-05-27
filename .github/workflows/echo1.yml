@@ -16,7 +16,7 @@ jobs:
       id: multiline
       run: |
         rust_toolchain="$(cat rust-toolchain)"
-        echo "RUST_TOOLCHAIN<<EOF"$'\n'"$rust_toolchain"$'\n'EOF >> "$RUST_TOOLCHAIN"
+        echo "RUST_TOOLCHAIN<<EOF"$'\n'"$rust_toolchain"$'\n'EOF >> "$GITHUB_OUTPUT"
 
     - name: Echo the environment
       run: |
