@@ -12,7 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          RUST_TOOLCHAIN="$(cat rust-toolchain)" && echo "RUST_TOOLCHAIN=$RUST_TOOLCHAIN" >> $GITHUB_ENV
+          {
+            echo 'RUST_TOOLCHAIN<<EOF'
+            cat rust-toolchain
+            echo EOF
+          } >> "$GITHUB_ENV"
 
   echo-env:
     name: Echo the environment
