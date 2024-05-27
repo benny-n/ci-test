@@ -1,0 +1,4 @@
+FROM scratch
+
+ARG RUST_TOOLCHAIN
+RUN echo "$RUST_TOOLCHAIN"
